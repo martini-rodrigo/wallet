@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: banking-api
+  name: banking-api-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: banking-api
+  template:
+    metadata:
+      labels:
+        app: banking-api
+    spec:
+      containers:
+        - name: banking-api
+          image: localhost:32000/banking/banking-api:0.0.1
+          envFrom:
+            - configMapRef:
+                name: banking-config
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "500m"
+            limits:
+              memory: "1Gi"
+              cpu: "1"
+      restartPolicy: Always
+      volumes:
+        - name: banking-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: banking-api-service
+  name: banking-api-service
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: banking-api
+

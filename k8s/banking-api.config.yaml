@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: banking-secret
+type: Opaque
+stringData:
+  BANKING_DB_USER: lolololo
+  BANKING_DB_PASS: lolololo
+  BANKING_DB_NAME: lolololo
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: banking-config
+data:
+  BANKING_API_JAVA_OPTS: "-Xmx512m -Xmx512m"
