@@ -12,20 +12,9 @@ public class AboutResponse {
         return version;
     }
 
-    private String getAppVersion() {
-//        String appVersion = "UNKNOWN";
-//
-//        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(
-//                "META-INF/maven/br.com.pernambucanas.banking/api/pom.properties")) {
-//            if (inputStream != null) {
-//                Properties properties = new Properties();
-//                properties.load(inputStream);
-//                appVersion = properties.getProperty("version", "UNKNOWN");
-//            }
-//        } catch (IOException e) {
-//            // handle exceptions here
-//        }
+    private static final String VERSION_APP = "1.0.0";
 
-        return "1.0.0";
+    private String getAppVersion() {
+        return VERSION_APP;
     }
 }
