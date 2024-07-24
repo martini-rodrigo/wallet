@@ -29,6 +29,29 @@ spec:
             limits:
               memory: "1Gi"
               cpu: "1"
+            livenessProbe:
+              httpGet:
+                scheme: HTTP
+                port: 8080
+                path: /actuator/health
+                httpHeaders:
+                  - name: Content-Type
+                    value: application/json
+              initialDelaySeconds: 30
+              periodSeconds: 10
+              failureThreshold: 3
+            readinessProbe:
+              httpGet:
+                scheme: HTTP
+                port: 8080
+                path: /actuator/health
+                httpHeaders:
+                  - name: Content-Type
+                    value: application/json
+              initialDelaySeconds: 30
+              periodSeconds: 5
+              failureThreshold: 3
+              successThreshold: 1
       restartPolicy: Always
       volumes:
         - name: banking-config
