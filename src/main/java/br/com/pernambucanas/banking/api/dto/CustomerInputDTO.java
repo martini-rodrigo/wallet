@@ -22,7 +22,7 @@ public class CustomerInputDTO {
     private String document;
     private String sex;
     private LocalDate birthDate;
-    private MaritalStatusType maritalStatus;
+    private String maritalStatus;
     private String email;
     private CostumerAdDressInputDTO address;
     private CostumerContactInputDTO contact;
