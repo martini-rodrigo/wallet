@@ -6,7 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public class DocumentUtils {
 
-	public static boolean isCPF(String CPF) {
+	public static boolean isValidCPF(String CPF) {
 		CPF = removeSpecialCharacters(CPF);
 
 		if (CPF.equals("00000000000") || CPF.equals("11111111111") || CPF.equals("22222222222")
@@ -56,7 +56,7 @@ public class DocumentUtils {
 		}
 	}
 
-	public static boolean isCNPJ(String CNPJ) {
+	public static boolean isValidCNPJ(String CNPJ) {
 		CNPJ = removeSpecialCharacters(CNPJ);
 
 		if (CNPJ.equals("00000000000000") || CNPJ.equals("11111111111111") || CNPJ.equals("22222222222222")
