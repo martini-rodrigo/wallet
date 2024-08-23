@@ -11,9 +11,9 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI openAPICustomer() {
         return new OpenAPI().info(new Info()
-                .title("Banking Customer")
+                .title("Banking API")
                 .version("1.0")
-                .description("This API exposes endpoints to manage customers."));
+                .description("This API exposes endpoints to manage API."));
     }
 
 }
