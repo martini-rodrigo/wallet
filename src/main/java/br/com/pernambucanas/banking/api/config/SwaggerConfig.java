@@ -13,7 +13,7 @@ public class SwaggerConfig {
         return new OpenAPI().info(new Info()
                 .title("Banking API")
                 .version("1.0")
-                .description("This API exposes endpoints to manage API."));
+                .description("This API exposes endpoints to manage API  ."));
     }
 
 }
