@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class CustomerCreateProducer {
 
-	@Value("${pubsub.create-customer-request.subscription.name}")
+	@Value("${pubsub.create-customer-request.topic.name}")
 	private String createCustomerRequestTopic;
 	@Autowired
 	private PubSubTemplate pubSubTemplate;
