@@ -24,9 +24,7 @@ public class CustomerValidator implements ConstraintValidator<CustomerConstraint
 
         if (StringUtils.isBlank(inputDTO.getDocument())) {
             error.add("Document is required.");
-        }
-
-        if (StringUtils.isNotBlank(inputDTO.getDocument())) {
+        } else {
             if (!Pattern.matches("[a-zA-Z0-9]+", inputDTO.getDocument())) {
                 error.add("Document contains special characters.");
             }
@@ -36,7 +34,7 @@ public class CustomerValidator implements ConstraintValidator<CustomerConstraint
         }
 
         if (StringUtils.isNotBlank(inputDTO.getEmail())) {
-            if(!new EmailValidator().isValid(inputDTO.getEmail(), context)){
+            if (!new EmailValidator().isValid(inputDTO.getEmail(), context)) {
                 error.add("Invalid email.");
             }
         }
