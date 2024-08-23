@@ -1,6 +1,5 @@
 package br.com.pernambucanas.banking.api.dto;
 
-import br.com.pernambucanas.banking.api.enums.MaritalStatusType;
 import br.com.pernambucanas.banking.api.validator.CustomerConstraint;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
@@ -17,15 +16,17 @@ public class CustomerInputDTO {
 
     @JsonIgnore
     private Long companyId;
-    private Integer managerId;
     private String name;
     private String document;
     private String sex;
     private LocalDate birthDate;
     private String maritalStatus;
     private String email;
-    private CostumerAdDressInputDTO address;
+    private Integer managerId;
+    private Integer classificationCode;
+    private CostumerAddressInputDTO address;
     private CostumerContactInputDTO contact;
+    private CostumerAccountInputDTO account;
 
 
     @Builder
@@ -33,7 +34,7 @@ public class CustomerInputDTO {
     @Setter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class CostumerAdDressInputDTO {
+    public static class CostumerAddressInputDTO {
 
         private String address;
         private String number;
@@ -55,6 +56,21 @@ public class CustomerInputDTO {
         private String areaCode;
         private String phone;
 
+    }
+
+    @Builder
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class CostumerAccountInputDTO {
+
+        private Long id;
+        private String agencyId;
+        private Long number;
+        private String type;
+        private Long groupId;
+        private Long packageRate;
     }
 
 }

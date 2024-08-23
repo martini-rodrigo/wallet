@@ -1,7 +1,9 @@
 package br.com.pernambucanas.banking.api.validator;
 
 import br.com.pernambucanas.banking.api.dto.CustomerInputDTO;
+import br.com.pernambucanas.banking.api.enums.AccountType;
 import br.com.pernambucanas.banking.api.enums.MaritalStatusType;
+import br.com.pernambucanas.banking.api.enums.SexType;
 import br.com.pernambucanas.banking.api.utils.DocumentUtils;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
@@ -17,14 +19,17 @@ public class CustomerValidator implements ConstraintValidator<CustomerConstraint
         if (StringUtils.isBlank(inputDTO.getName())) {
             error.add("Name is required.");
         }
+
         if (StringUtils.isBlank(inputDTO.getDocument())) {
             error.add("Document is required.");
         }
+
         if (StringUtils.isNotBlank(inputDTO.getDocument())) {
             if (!DocumentUtils.isValidCPF(inputDTO.getDocument())) {
                 error.add("Document invalid.");
             }
         }
+
         if (StringUtils.isNotBlank(inputDTO.getMaritalStatus())) {
             var isInvalidMaritalStatus = Arrays.asList(MaritalStatusType.values()).stream()
                     .noneMatch(o -> o.name().equals(inputDTO.getMaritalStatus()));
@@ -32,11 +37,31 @@ public class CustomerValidator implements ConstraintValidator<CustomerConstraint
                 error.add(String.format("Invalid marital status. Valid types: %s.", EnumSet.allOf(MaritalStatusType.class)));
             }
         }
+
         if (Objects.isNull(inputDTO.getBirthDate())) {
             error.add("Birth date is required.");
         }
+
+        if (StringUtils.isBlank(inputDTO.getSex())) {
+            error.add("Sex is required.");
+        } else {
+            var isInvalidSexType = Arrays.asList(SexType.values()).stream()
+                    .noneMatch(o -> o.name().equals(inputDTO.getSex()));
+            if (isInvalidSexType) {
+                error.add(String.format("Invalid sex type. Valid types: %s.", EnumSet.allOf(SexType.class)));
+            }
+        }
+
         if (Objects.isNull(inputDTO.getManagerId())) {
             error.add("Manager id is required.");
+        }
+
+        if (Objects.nonNull(inputDTO.getAccount()) && StringUtils.isNotBlank(inputDTO.getAccount().getType())) {
+            var isInvalidAccountType = Arrays.asList(AccountType.values()).stream()
+                    .noneMatch(o -> o.name().equals(inputDTO.getAccount().getType()));
+            if (isInvalidAccountType) {
+                error.add(String.format("Invalid account type. Valid types: %s.", EnumSet.allOf(AccountType.class)));
+            }
         }
 
         if (!error.isEmpty()) {
