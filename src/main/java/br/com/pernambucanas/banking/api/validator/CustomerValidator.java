@@ -26,7 +26,7 @@ public class CustomerValidator implements ConstraintValidator<CustomerConstraint
             error.add("Document is required.");
         } else {
             if (!Pattern.matches("[a-zA-Z0-9]+", inputDTO.getDocument())) {
-                error.add("Document contains special characters.");
+                error.add("Document must not contain special characters.");
             }
             if (!DocumentUtils.isValidCPF(inputDTO.getDocument())) {
                 error.add("Invalid document.");
