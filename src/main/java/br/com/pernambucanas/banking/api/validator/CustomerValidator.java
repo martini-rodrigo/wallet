@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.hibernate.validator.internal.constraintvalidators.bv.EmailValidator;
 
 import java.util.*;
+import java.util.regex.Pattern;
 
 public class CustomerValidator implements ConstraintValidator<CustomerConstraint, CustomerInputDTO> {
     @Override
@@ -26,6 +27,9 @@ public class CustomerValidator implements ConstraintValidator<CustomerConstraint
         }
 
         if (StringUtils.isNotBlank(inputDTO.getDocument())) {
+            if (!Pattern.matches("[a-zA-Z0-9]+", inputDTO.getDocument())) {
+                error.add("Document contains special characters.");
+            }
             if (!DocumentUtils.isValidCPF(inputDTO.getDocument())) {
                 error.add("Invalid document.");
             }
