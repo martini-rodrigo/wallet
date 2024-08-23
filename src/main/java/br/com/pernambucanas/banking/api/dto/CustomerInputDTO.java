@@ -18,7 +18,7 @@ public class CustomerInputDTO {
     private Long companyId;
     private String name;
     private String document;
-    private String sex;
+    private String gender;
     private LocalDate birthDate;
     private String maritalStatus;
     private String email;

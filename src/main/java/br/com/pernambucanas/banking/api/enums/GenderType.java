@@ -3,7 +3,7 @@ package br.com.pernambucanas.banking.api.enums;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public enum SexType {
+public enum GenderType {
 
 	M,
 	F;

@@ -3,7 +3,7 @@ package br.com.pernambucanas.banking.api.validator;
 import br.com.pernambucanas.banking.api.dto.CustomerInputDTO;
 import br.com.pernambucanas.banking.api.enums.AccountType;
 import br.com.pernambucanas.banking.api.enums.MaritalStatusType;
-import br.com.pernambucanas.banking.api.enums.SexType;
+import br.com.pernambucanas.banking.api.enums.GenderType;
 import br.com.pernambucanas.banking.api.utils.DocumentUtils;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
@@ -51,13 +51,13 @@ public class CustomerValidator implements ConstraintValidator<CustomerConstraint
             error.add("Birth date is required.");
         }
 
-        if (StringUtils.isBlank(inputDTO.getSex())) {
-            error.add("Sex is required.");
+        if (StringUtils.isBlank(inputDTO.getGender())) {
+            error.add("Gender is required.");
         } else {
-            var isInvalidSexType = Arrays.asList(SexType.values()).stream()
-                    .noneMatch(o -> o.name().equals(inputDTO.getSex()));
+            var isInvalidSexType = Arrays.asList(GenderType.values()).stream()
+                    .noneMatch(o -> o.name().equals(inputDTO.getGender()));
             if (isInvalidSexType) {
-                error.add(String.format("Invalid sex type. Valid types: %s.", EnumSet.allOf(SexType.class)));
+                error.add(String.format("Invalid gender type. Valid types: %s.", EnumSet.allOf(GenderType.class)));
             }
         }
 
