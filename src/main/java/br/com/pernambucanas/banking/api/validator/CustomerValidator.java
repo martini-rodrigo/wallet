@@ -8,6 +8,7 @@ import br.com.pernambucanas.banking.api.utils.DocumentUtils;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.apache.commons.lang3.StringUtils;
+import org.hibernate.validator.internal.constraintvalidators.bv.EmailValidator;
 
 import java.util.*;
 
@@ -26,7 +27,13 @@ public class CustomerValidator implements ConstraintValidator<CustomerConstraint
 
         if (StringUtils.isNotBlank(inputDTO.getDocument())) {
             if (!DocumentUtils.isValidCPF(inputDTO.getDocument())) {
-                error.add("Document invalid.");
+                error.add("Invalid document.");
+            }
+        }
+
+        if (StringUtils.isNotBlank(inputDTO.getEmail())) {
+            if(!new EmailValidator().isValid(inputDTO.getEmail(), context)){
+                error.add("Invalid email.");
             }
         }
 
