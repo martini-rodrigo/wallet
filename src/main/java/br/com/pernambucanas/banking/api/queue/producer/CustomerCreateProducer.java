@@ -18,8 +18,9 @@ public class CustomerCreateProducer {
 	@Autowired
 	private PubSubTemplate pubSubTemplate;
 
-	public void publish(CustomerInputDTO inputDTO) {
+	public CustomerInputDTO publish(CustomerInputDTO inputDTO) {
 		log.info("publishing customer [{}] in topic [{}] ", inputDTO.getDocument(), createCustomerRequestTopic);
 		pubSubTemplate.publish(createCustomerRequestTopic, inputDTO);
+		return inputDTO;
 	}
 }
