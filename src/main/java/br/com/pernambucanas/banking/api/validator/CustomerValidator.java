@@ -73,6 +73,26 @@ public class CustomerValidator implements ConstraintValidator<CustomerConstraint
             }
         }
 
+        if (Objects.isNull(inputDTO.getAddress())) {
+            error.add("Address is required.");
+        } else {
+            var address = inputDTO.getAddress();
+            if (StringUtils.isBlank(address.getAddress())) {
+                error.add("Address is required.");
+            }
+            if (StringUtils.isBlank(address.getNumber())) {
+                error.add("Address number is required.");
+            }
+            if (StringUtils.isBlank(address.getCity())) {
+                error.add("Address city is required.");
+            }
+            if (StringUtils.isBlank(address.getPostalCode())) {
+                error.add("Address postal code is required.");
+            }
+            if (StringUtils.isBlank(address.getState())) {
+                error.add("Address state is required.");
+            }
+        }
         if (!error.isEmpty()) {
             context.disableDefaultConstraintViolation();
             error.forEach(o -> context.buildConstraintViolationWithTemplate(o).addConstraintViolation());
