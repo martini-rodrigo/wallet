@@ -12,7 +12,7 @@ class ApplicationTests {
 
     @Test
     public void main() {
-        Application.main(new String[] {});
+        ApplicationApi.main(new String[] {});
     }
 
 }
