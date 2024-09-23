@@ -1,21 +1,19 @@
 package br.com.pernambucanas.banking.api.exception.handler;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.mock;
-
-import java.util.List;
-
+import br.com.pernambucanas.banking.api.controller.data.ResponseError;
+import br.com.pernambucanas.banking.api.exception.BusinessException;
+import br.com.pernambucanas.banking.api.exception.NotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.context.request.WebRequest;
 
-import br.com.pernambucanas.banking.api.controller.data.ResponseError;
-import br.com.pernambucanas.banking.api.exception.BusinessException;
-import br.com.pernambucanas.banking.api.exception.NotFoundException;
-import br.com.pernambucanas.banking.api.exception.UnauthorizedException;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.mock;
 
 public class GlobalExceptionHandlerTest {
 	private GlobalExceptionHandler globalExceptionHandler;
@@ -49,19 +47,6 @@ public class GlobalExceptionHandlerTest {
 		ResponseError responseBody = (ResponseError) response.getBody();
 		assert responseBody != null;
 		assertEquals(List.of("Not found error"), responseBody.getErrors());
-		assertNotNull(responseBody.getTimestamp());
-	}
-
-	@Test
-	public void testHandleUnauthorizedException() {
-		UnauthorizedException ex = new UnauthorizedException("User Unauthorized");
-
-		ResponseEntity<Object> response = globalExceptionHandler.handleUnauthorizedException(ex);
-
-		assertEquals(HttpStatus.UNAUTHORIZED, response.getStatusCode());
-		ResponseError responseBody = (ResponseError) response.getBody();
-		assert responseBody != null;
-		assertEquals(List.of("User Unauthorized"), responseBody.getErrors());
 		assertNotNull(responseBody.getTimestamp());
 	}
 
