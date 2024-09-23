@@ -2,8 +2,8 @@ package br.com.pernambucanas.banking.api.validator;
 
 import br.com.pernambucanas.banking.api.dto.CustomerInputDTO;
 import br.com.pernambucanas.banking.api.enums.AccountType;
-import br.com.pernambucanas.banking.api.enums.MaritalStatusType;
 import br.com.pernambucanas.banking.api.enums.GenderType;
+import br.com.pernambucanas.banking.api.enums.MaritalStatusType;
 import br.com.pernambucanas.banking.api.utils.DocumentUtils;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
@@ -14,6 +14,7 @@ import java.util.*;
 import java.util.regex.Pattern;
 
 public class CustomerValidator implements ConstraintValidator<CustomerConstraint, CustomerInputDTO> {
+
     @Override
     public boolean isValid(CustomerInputDTO inputDTO, ConstraintValidatorContext context) {
         List<String> error = new ArrayList<>();
@@ -90,7 +91,7 @@ public class CustomerValidator implements ConstraintValidator<CustomerConstraint
                 error.add("Address postal code is required.");
             }
             if (StringUtils.isBlank(address.getState())) {
-                error.add("Address state is required.");
+                error.add("Address postal code is required.");
             }
         }
         if (!error.isEmpty()) {

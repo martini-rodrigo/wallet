@@ -3,6 +3,7 @@ package br.com.pernambucanas.banking.api.exception.handler;
 import br.com.pernambucanas.banking.api.controller.data.ResponseError;
 import br.com.pernambucanas.banking.api.exception.BusinessException;
 import br.com.pernambucanas.banking.api.exception.NotFoundException;
+import br.com.pernambucanas.banking.api.handler.GlobalExceptionHandler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;

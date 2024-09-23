@@ -1,31 +1,34 @@
 package br.com.pernambucanas.banking.api.utils;
 
+import br.com.pernambucanas.banking.api.exception.BusinessException;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
-import br.com.pernambucanas.banking.api.exception.BusinessException;
-
 public class JsonUtils {
+
+	private JsonUtils() {
+		throw new IllegalStateException("Utility class");
+	}
 
 	public static <T> Object convertJsonInStringToObject(String jsonInString, Class<T> clazz) {
 		try {
-			return (T) JsonUtils.createObjectMapper().readValue(jsonInString, clazz);
+			return JsonUtils.createObjectMapper().readValue(jsonInString, clazz);
 		} catch (Exception e) {
 			throw new BusinessException("Error convert json to object.", e);
 		}
 	}
 
-	public static <T> String converObjectToJsonInString(Object clazz) {
+	public static String converObjectToJsonInString(Object clazz) {
 		try {
 			return JsonUtils.createObjectMapper().writeValueAsString(clazz);
 		} catch (Exception e) {
 			throw new BusinessException("Error convert object to json.", e);
 		}
 	}
-	
+
 	public static ObjectMapper createObjectMapper() {
 		var mapper = new ObjectMapper();
 		mapper.registerModule(new JavaTimeModule());
