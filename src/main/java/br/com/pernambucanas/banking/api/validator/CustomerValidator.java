@@ -34,10 +34,9 @@ public class CustomerValidator implements ConstraintValidator<CustomerConstraint
             }
         }
 
-        if (StringUtils.isNotBlank(inputDTO.getEmail())) {
-            if (!new EmailValidator().isValid(inputDTO.getEmail(), context)) {
-                error.add("Invalid email.");
-            }
+        if (StringUtils.isNotBlank(inputDTO.getEmail())
+                && !new EmailValidator().isValid(inputDTO.getEmail(), context)) {
+            error.add("Invalid email.");
         }
 
         if (StringUtils.isNotBlank(inputDTO.getMaritalStatus())) {
