@@ -49,7 +49,6 @@ public class CustomerValidator implements ConstraintValidator<CustomerConstraint
                 .noneMatch(o -> o.name().equals(inputDTO.getMaritalStatus()))) {
             error.add(String.format("Invalid marital status. Valid types: %s.", EnumSet.allOf(MaritalStatusType.class)));
         }
-
         if (StringUtils.isBlank(inputDTO.getDocument())) {
             error.add("Document is required.");
         } else {
@@ -60,7 +59,6 @@ public class CustomerValidator implements ConstraintValidator<CustomerConstraint
                 error.add("Invalid document.");
             }
         }
-
         if (StringUtils.isBlank(inputDTO.getGender())) {
             error.add("Gender is required.");
         } else {
