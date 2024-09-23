@@ -18,9 +18,33 @@ public class CustomerValidator implements ConstraintValidator<CustomerConstraint
     @Override
     public boolean isValid(CustomerInputDTO inputDTO, ConstraintValidatorContext context) {
         List<String> error = new ArrayList<>();
+        error.addAll(validationPersonalData(inputDTO, context));
+        error.addAll(validationAddress(inputDTO));
+        error.addAll(validationAccount(inputDTO));
+
+        if (!error.isEmpty()) {
+            context.disableDefaultConstraintViolation();
+            error.forEach(o -> context.buildConstraintViolationWithTemplate(o).addConstraintViolation());
+            return false;
+        }
+        return true;
+    }
+
+    private List<String> validationPersonalData(CustomerInputDTO inputDTO, ConstraintValidatorContext context) {
+        List<String> error = new ArrayList<>();
 
         if (StringUtils.isBlank(inputDTO.getName())) {
             error.add("Name is required.");
+        }
+        if (Objects.isNull(inputDTO.getBirthDate())) {
+            error.add("Birth date is required.");
+        }
+        if (Objects.isNull(inputDTO.getManagerId())) {
+            error.add("Manager id is required.");
+        }
+        if (StringUtils.isNotBlank(inputDTO.getEmail())
+                && !new EmailValidator().isValid(inputDTO.getEmail(), context)) {
+            error.add("Invalid email.");
         }
 
         if (StringUtils.isBlank(inputDTO.getDocument())) {
@@ -34,21 +58,12 @@ public class CustomerValidator implements ConstraintValidator<CustomerConstraint
             }
         }
 
-        if (StringUtils.isNotBlank(inputDTO.getEmail())
-                && !new EmailValidator().isValid(inputDTO.getEmail(), context)) {
-            error.add("Invalid email.");
-        }
-
         if (StringUtils.isNotBlank(inputDTO.getMaritalStatus())) {
             var isInvalidMaritalStatus = Arrays.asList(MaritalStatusType.values()).stream()
                     .noneMatch(o -> o.name().equals(inputDTO.getMaritalStatus()));
             if (isInvalidMaritalStatus) {
                 error.add(String.format("Invalid marital status. Valid types: %s.", EnumSet.allOf(MaritalStatusType.class)));
             }
-        }
-
-        if (Objects.isNull(inputDTO.getBirthDate())) {
-            error.add("Birth date is required.");
         }
 
         if (StringUtils.isBlank(inputDTO.getGender())) {
@@ -60,18 +75,11 @@ public class CustomerValidator implements ConstraintValidator<CustomerConstraint
                 error.add(String.format("Invalid gender type. Valid types: %s.", EnumSet.allOf(GenderType.class)));
             }
         }
+        return error;
+    }
 
-        if (Objects.isNull(inputDTO.getManagerId())) {
-            error.add("Manager id is required.");
-        }
-
-        if (Objects.nonNull(inputDTO.getAccount()) && StringUtils.isNotBlank(inputDTO.getAccount().getType())) {
-            var isInvalidAccountType = Arrays.asList(AccountType.values()).stream()
-                    .noneMatch(o -> o.name().equals(inputDTO.getAccount().getType()));
-            if (isInvalidAccountType) {
-                error.add(String.format("Invalid account type. Valid types: %s.", EnumSet.allOf(AccountType.class)));
-            }
-        }
+    private List<String> validationAddress(CustomerInputDTO inputDTO) {
+        List<String> error = new ArrayList<>();
 
         if (Objects.isNull(inputDTO.getAddress())) {
             error.add("Address is required.");
@@ -90,14 +98,23 @@ public class CustomerValidator implements ConstraintValidator<CustomerConstraint
                 error.add("Address postal code is required.");
             }
             if (StringUtils.isBlank(address.getState())) {
-                error.add("Address postal code is required.");
+                error.add("Address state is required.");
             }
         }
-        if (!error.isEmpty()) {
-            context.disableDefaultConstraintViolation();
-            error.forEach(o -> context.buildConstraintViolationWithTemplate(o).addConstraintViolation());
-            return false;
+        return error;
+    }
+
+    private List<String> validationAccount(CustomerInputDTO inputDTO) {
+        List<String> error = new ArrayList<>();
+
+        if (Objects.nonNull(inputDTO.getAccount()) && StringUtils.isNotBlank(inputDTO.getAccount().getType())) {
+            var isInvalidAccountType = Arrays.asList(AccountType.values()).stream()
+                    .noneMatch(o -> o.name().equals(inputDTO.getAccount().getType()));
+            if (isInvalidAccountType) {
+                error.add(String.format("Invalid account type. Valid types: %s.", EnumSet.allOf(AccountType.class)));
+            }
         }
-        return true;
+        return error;
     }
 }
+

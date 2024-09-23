@@ -1,6 +1,9 @@
 package br.com.pernambucanas.banking.api.controller;
 
 import br.com.pernambucanas.banking.api.dto.CustomerInputDTO;
+import br.com.pernambucanas.banking.api.enums.AccountType;
+import br.com.pernambucanas.banking.api.enums.GenderType;
+import br.com.pernambucanas.banking.api.enums.MaritalStatusType;
 import br.com.pernambucanas.banking.api.queue.producer.CustomerCreateProducer;
 import br.com.pernambucanas.banking.api.utils.JsonUtils;
 import org.junit.jupiter.api.Test;
@@ -34,7 +37,8 @@ public class CustomerControllerTest {
         var inputDTO = CustomerInputDTO.builder()
                 .name("Test")
                 .document("75111303057")
-                .gender("M")
+                .gender(GenderType.M.name())
+                .maritalStatus(MaritalStatusType.MARRIED.name())
                 .email("email@gmai.com")
                 .rg("3125587777")
                 .birthDate(LocalDate.now())
@@ -46,6 +50,9 @@ public class CustomerControllerTest {
                         .city("Sao")
                         .neighborhood("Vila")
                         .postalCode("0999922")
+                        .build())
+                .account(CustomerInputDTO.CostumerAccountInputDTO.builder()
+                        .type(AccountType.CC.name())
                         .build())
                 .build();
         when(customerCreateProducer.publish(inputDTO))
@@ -88,7 +95,8 @@ public class CustomerControllerTest {
         var inputDTO = CustomerInputDTO.builder()
                 .name("Test")
                 .document("75111303057")
-                .gender("M")
+                .gender(GenderType.F.name())
+                .maritalStatus(MaritalStatusType.SINGLE.name())
                 .email("email@gmai.com")
                 .rg("3125587777")
                 .birthDate(LocalDate.now())
