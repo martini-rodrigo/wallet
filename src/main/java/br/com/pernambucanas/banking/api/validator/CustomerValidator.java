@@ -19,6 +19,7 @@ public class CustomerValidator implements ConstraintValidator<CustomerConstraint
     public boolean isValid(CustomerInputDTO inputDTO, ConstraintValidatorContext context) {
         List<String> error = new ArrayList<>();
         error.addAll(validationPersonalData(inputDTO, context));
+        error.addAll(validationPersonalDocument(inputDTO));
         error.addAll(validationAddress(inputDTO));
         error.addAll(validationAccount(inputDTO));
 
@@ -49,6 +50,20 @@ public class CustomerValidator implements ConstraintValidator<CustomerConstraint
                 .noneMatch(o -> o.name().equals(inputDTO.getMaritalStatus()))) {
             error.add(String.format("Invalid marital status. Valid types: %s.", EnumSet.allOf(MaritalStatusType.class)));
         }
+        if (StringUtils.isBlank(inputDTO.getGender())) {
+            error.add("Gender is required.");
+        } else {
+            if (Arrays.asList(GenderType.values()).stream()
+                    .noneMatch(o -> o.name().equals(inputDTO.getGender()))) {
+                error.add(String.format("Invalid gender type. Valid types: %s.", EnumSet.allOf(GenderType.class)));
+            }
+        }
+        return error;
+    }
+
+    private List<String> validationPersonalDocument(CustomerInputDTO inputDTO) {
+        List<String> error = new ArrayList<>();
+
         if (StringUtils.isBlank(inputDTO.getDocument())) {
             error.add("Document is required.");
         } else {
@@ -57,14 +72,6 @@ public class CustomerValidator implements ConstraintValidator<CustomerConstraint
             }
             if (!DocumentUtils.isValidCPF(inputDTO.getDocument())) {
                 error.add("Invalid document.");
-            }
-        }
-        if (StringUtils.isBlank(inputDTO.getGender())) {
-            error.add("Gender is required.");
-        } else {
-            if (Arrays.asList(GenderType.values()).stream()
-                    .noneMatch(o -> o.name().equals(inputDTO.getGender()))) {
-                error.add(String.format("Invalid gender type. Valid types: %s.", EnumSet.allOf(GenderType.class)));
             }
         }
         return error;
