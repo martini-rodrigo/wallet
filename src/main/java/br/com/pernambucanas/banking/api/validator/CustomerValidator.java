@@ -42,9 +42,12 @@ public class CustomerValidator implements ConstraintValidator<CustomerConstraint
         if (Objects.isNull(inputDTO.getManagerId())) {
             error.add("Manager id is required.");
         }
-        if (StringUtils.isNotBlank(inputDTO.getEmail())
-                && !new EmailValidator().isValid(inputDTO.getEmail(), context)) {
+        if (StringUtils.isNotBlank(inputDTO.getEmail()) && !new EmailValidator().isValid(inputDTO.getEmail(), context)) {
             error.add("Invalid email.");
+        }
+        if (StringUtils.isNotBlank(inputDTO.getMaritalStatus()) && Arrays.asList(MaritalStatusType.values()).stream()
+                .noneMatch(o -> o.name().equals(inputDTO.getMaritalStatus()))) {
+            error.add(String.format("Invalid marital status. Valid types: %s.", EnumSet.allOf(MaritalStatusType.class)));
         }
 
         if (StringUtils.isBlank(inputDTO.getDocument())) {
@@ -58,20 +61,11 @@ public class CustomerValidator implements ConstraintValidator<CustomerConstraint
             }
         }
 
-        if (StringUtils.isNotBlank(inputDTO.getMaritalStatus())) {
-            var isInvalidMaritalStatus = Arrays.asList(MaritalStatusType.values()).stream()
-                    .noneMatch(o -> o.name().equals(inputDTO.getMaritalStatus()));
-            if (isInvalidMaritalStatus) {
-                error.add(String.format("Invalid marital status. Valid types: %s.", EnumSet.allOf(MaritalStatusType.class)));
-            }
-        }
-
         if (StringUtils.isBlank(inputDTO.getGender())) {
             error.add("Gender is required.");
         } else {
-            var isInvalidSexType = Arrays.asList(GenderType.values()).stream()
-                    .noneMatch(o -> o.name().equals(inputDTO.getGender()));
-            if (isInvalidSexType) {
+            if (Arrays.asList(GenderType.values()).stream()
+                    .noneMatch(o -> o.name().equals(inputDTO.getGender()))) {
                 error.add(String.format("Invalid gender type. Valid types: %s.", EnumSet.allOf(GenderType.class)));
             }
         }
