@@ -14,7 +14,7 @@ public class DocumentUtilsTest {
 
     @Test
     void testInvalidDocument() {
-        var isValidCPF = DocumentUtils.isValidCPF("00000000000");
+        var isValidCPF = DocumentUtils.isValidCPF("00000000022");
         assertTrue(!isValidCPF);
     }
 
