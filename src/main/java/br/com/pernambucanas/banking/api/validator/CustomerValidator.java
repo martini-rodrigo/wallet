@@ -1,7 +1,6 @@
 package br.com.pernambucanas.banking.api.validator;
 
 import br.com.pernambucanas.banking.api.dto.CustomerInputDTO;
-import br.com.pernambucanas.banking.api.enums.AccountType;
 import br.com.pernambucanas.banking.api.enums.GenderType;
 import br.com.pernambucanas.banking.api.enums.MaritalStatusType;
 import br.com.pernambucanas.banking.api.utils.DocumentUtils;
@@ -21,7 +20,6 @@ public class CustomerValidator implements ConstraintValidator<CustomerConstraint
         error.addAll(validationPersonalData(inputDTO, context));
         error.addAll(validationPersonalDocument(inputDTO));
         error.addAll(validationAddress(inputDTO));
-        error.addAll(validationAccount(inputDTO));
 
         if (!error.isEmpty()) {
             context.disableDefaultConstraintViolation();
@@ -103,17 +101,5 @@ public class CustomerValidator implements ConstraintValidator<CustomerConstraint
         return error;
     }
 
-    private List<String> validationAccount(CustomerInputDTO inputDTO) {
-        List<String> error = new ArrayList<>();
-
-        if (Objects.nonNull(inputDTO.getAccount()) && StringUtils.isNotBlank(inputDTO.getAccount().getType())) {
-            var isInvalidAccountType = Arrays.asList(AccountType.values()).stream()
-                    .noneMatch(o -> o.name().equals(inputDTO.getAccount().getType()));
-            if (isInvalidAccountType) {
-                error.add(String.format("Invalid account type. Valid types: %s.", EnumSet.allOf(AccountType.class)));
-            }
-        }
-        return error;
-    }
 }
 

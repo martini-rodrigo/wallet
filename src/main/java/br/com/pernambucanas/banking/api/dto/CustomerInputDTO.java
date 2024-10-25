@@ -66,12 +66,8 @@ public class CustomerInputDTO {
     @AllArgsConstructor
     public static class CostumerAccountInputDTO {
 
-        private Long id;
-        private String agencyId;
+        @JsonIgnore
         private Long number;
-        private String type;
-        private Long groupId;
-        private Long packageRate;
     }
 
 }

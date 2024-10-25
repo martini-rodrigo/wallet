@@ -1,0 +1,25 @@
+{
+   "name":"Teste-Customer",
+   "document":"55361808008",
+   "rg":"00000000099",
+   "companyId":23,
+   "gender":"M",
+   "birthDate":"2000-08-01",
+   "maritalStatus":"SINGLE",
+   "managerId":2,
+   "email":"email@email.com",
+   "address":{
+      "address":"Avenida Joao",
+      "number":"324",
+      "city":"Campinas",
+      "state":"SP",
+      "neighborhood":"CENTRO",
+      "postalCode":"13110000",
+      "additionalAddress":"Complemento"
+   },
+   "contact":{
+      "name":"Contact",
+      "areaCode":"11",
+      "phone":"988549877"
+   }
+}
