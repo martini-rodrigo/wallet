@@ -51,14 +51,11 @@ public class CustomerControllerTest {
                         .neighborhood("Vila")
                         .postalCode("0999922")
                         .build())
-                .account(CustomerInputDTO.CostumerAccountInputDTO.builder()
-                        .type(AccountType.CC.name())
-                        .build())
                 .build();
         when(customerCreateProducer.publish(inputDTO))
                 .thenReturn(inputDTO);
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/customer")
+        mockMvc.perform(MockMvcRequestBuilders.post("/customer")
                         .header("companyId", 1)
                         .content(JsonUtils.converObjectToJsonInString(inputDTO))
                         .contentType(MediaType.APPLICATION_JSON))
@@ -70,7 +67,7 @@ public class CustomerControllerTest {
         var inputDTO = CustomerInputDTO.builder()
                 .document("00000000000")
                 .build();
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/customer")
+        mockMvc.perform(MockMvcRequestBuilders.post("/customer")
                         .content(JsonUtils.converObjectToJsonInString(inputDTO))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
@@ -83,7 +80,7 @@ public class CustomerControllerTest {
                 .document("75111303057")
                 .email("email.com")
                 .build();
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/customer")
+        mockMvc.perform(MockMvcRequestBuilders.post("/customer")
                         .content(JsonUtils.converObjectToJsonInString(inputDTO))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
@@ -102,7 +99,7 @@ public class CustomerControllerTest {
                 .birthDate(LocalDate.now())
                 .managerId(1)
                 .build();
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/customer")
+        mockMvc.perform(MockMvcRequestBuilders.post("/customer")
                         .content(JsonUtils.converObjectToJsonInString(inputDTO))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
