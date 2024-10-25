@@ -1,7 +1,6 @@
 package br.com.pernambucanas.banking.api.controller;
 
 import br.com.pernambucanas.banking.api.dto.CustomerInputDTO;
-import br.com.pernambucanas.banking.api.enums.AccountType;
 import br.com.pernambucanas.banking.api.enums.GenderType;
 import br.com.pernambucanas.banking.api.enums.MaritalStatusType;
 import br.com.pernambucanas.banking.api.queue.producer.CustomerCreateProducer;
