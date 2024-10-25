@@ -3,6 +3,7 @@ package br.com.pernambucanas.banking.api.handler;
 import br.com.pernambucanas.banking.api.controller.data.ResponseError;
 import br.com.pernambucanas.banking.api.exception.BusinessException;
 import br.com.pernambucanas.banking.api.exception.NotFoundException;
+import br.com.pernambucanas.banking.api.exception.UnauthorizedException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -48,6 +49,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         List<String> errors = List.of(Optional.ofNullable(ex.getCause()).filter(Objects::nonNull).map(Object::toString)
                 .orElse(ex.getMessage()));
         return new ResponseEntity<>(new ResponseError(errors), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(UnauthorizedException.class)
+    public ResponseEntity<ResponseError> handleUnauthorizedException(Exception ex) {
+        List<String> errors = List.of(Optional.ofNullable(ex.getCause()).filter(Objects::nonNull).map(Object::toString)
+                .orElse(ex.getMessage()));
+        return new ResponseEntity<>(new ResponseError(errors), HttpStatus.UNAUTHORIZED);
     }
 
 }

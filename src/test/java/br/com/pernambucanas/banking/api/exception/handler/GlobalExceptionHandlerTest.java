@@ -3,6 +3,7 @@ package br.com.pernambucanas.banking.api.exception.handler;
 import br.com.pernambucanas.banking.api.controller.data.ResponseError;
 import br.com.pernambucanas.banking.api.exception.BusinessException;
 import br.com.pernambucanas.banking.api.exception.NotFoundException;
+import br.com.pernambucanas.banking.api.exception.UnauthorizedException;
 import br.com.pernambucanas.banking.api.handler.GlobalExceptionHandler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -61,6 +62,19 @@ public class GlobalExceptionHandlerTest {
 		ResponseError responseBody = (ResponseError) response.getBody();
 		assert responseBody != null;
 		assertEquals(List.of("Internal server error"), responseBody.getErrors());
+		assertNotNull(responseBody.getTimestamp());
+	}
+
+	@Test
+	public void testHandleUnauthorizedException() {
+		UnauthorizedException ex = new UnauthorizedException("User Unauthorized");
+
+		ResponseEntity<ResponseError> response = globalExceptionHandler.handleUnauthorizedException(ex);
+
+		assertEquals(HttpStatus.UNAUTHORIZED, response.getStatusCode());
+		ResponseError responseBody = (ResponseError) response.getBody();
+		assert responseBody != null;
+		assertEquals(List.of("User Unauthorized"), responseBody.getErrors());
 		assertNotNull(responseBody.getTimestamp());
 	}
 }
