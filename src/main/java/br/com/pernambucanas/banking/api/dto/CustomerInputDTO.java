@@ -27,6 +27,7 @@ public class CustomerInputDTO {
     private Integer classificationCode;
     private CostumerAddressInputDTO address;
     private CostumerContactInputDTO contact;
+    @JsonIgnore
     private CostumerAccountInputDTO account;
 
 
@@ -66,8 +67,8 @@ public class CustomerInputDTO {
     @AllArgsConstructor
     public static class CostumerAccountInputDTO {
 
-        @JsonIgnore
         private Long number;
+        private Integer digit;
     }
 
 }

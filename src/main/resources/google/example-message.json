@@ -1,6 +1,7 @@
 {
+   "id":7375734,
    "name":"Teste-Customer",
-   "document":"55361808008",
+   "document":"66071167019",
    "rg":"00000000099",
    "companyId":23,
    "gender":"M",
@@ -21,5 +22,9 @@
       "name":"Contact",
       "areaCode":"11",
       "phone":"988549877"
+   },
+   "account":{
+      "number":13243363,
+      "digit":10
    }
 }
