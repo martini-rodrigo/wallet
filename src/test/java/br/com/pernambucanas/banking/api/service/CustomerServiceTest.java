@@ -22,7 +22,7 @@ public class CustomerServiceTest {
 
     @MockBean
     private CustomerCreateProducer customerCreateProducer;
-
+    
     @Autowired
     private CustomerService customerService;
 
