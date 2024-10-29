@@ -41,6 +41,24 @@ public class FeignExceptionHandlerTest {
 	public void testBadRequestFeignException() {
 		var response = feignExceptionHandler.decode("getCustomer",
 				Response.builder()
+						.status(404)
+						.reason("message error")
+						.request(Request.create(
+								Request.HttpMethod.GET,
+								"v1/customer",
+								new HashMap<>(),
+								null,
+								null,
+								null))
+						.build());
+
+		assertTrue(response.getMessage().contains("[404 message error] during [GET] to [v1/customer] [getCustomer]"));
+	}
+
+	@Test
+	public void testUnauthorizedFeignException() {
+		var response = feignExceptionHandler.decode("getCustomer",
+				Response.builder()
 						.status(401)
 						.reason("message error")
 						.request(Request.create(
@@ -53,6 +71,24 @@ public class FeignExceptionHandlerTest {
 						.build());
 
 		assertTrue(response.getMessage().contains("[401 message error] during [GET] to [v1/customer] [getCustomer]"));
+	}
+
+	@Test
+	public void testDefaultFeignException() {
+		var response = feignExceptionHandler.decode("getCustomer",
+				Response.builder()
+						.status(500)
+						.reason("message error")
+						.request(Request.create(
+								Request.HttpMethod.GET,
+								"v1/customer",
+								new HashMap<>(),
+								null,
+								null,
+								null))
+						.build());
+
+		assertTrue(response.getMessage().contains("[500 message error] during [GET] to [v1/customer] [getCustomer]"));
 	}
 
 }
