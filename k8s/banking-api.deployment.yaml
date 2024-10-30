@@ -17,6 +17,9 @@ spec:
       containers:
         - name: banking-api
           image: localhost:32000/banking/banking-api:0.0.1
+          env:
+            - name: spring.profiles.active
+              value: staging
           envFrom:
             - configMapRef:
                 name: banking-config
