@@ -1,7 +1,7 @@
 package br.com.pernambucanas.banking.api.dto;
 
 import br.com.pernambucanas.banking.api.validator.CustomerConstraint;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.v3.oas.annotations.Hidden;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -14,8 +14,11 @@ import java.time.LocalDate;
 @CustomerConstraint
 public class CustomerInputDTO {
 
-    @JsonIgnore
+    @Hidden
     private Long companyId;
+    @Hidden
+    private CostumerAccountInputDTO account;
+
     private String name;
     private String document;
     private String gender;
@@ -25,8 +28,6 @@ public class CustomerInputDTO {
     private String email;
     private CostumerAddressInputDTO address;
     private CostumerContactInputDTO contact;
-    @JsonIgnore
-    private CostumerAccountInputDTO account;
 
 
     @Builder
