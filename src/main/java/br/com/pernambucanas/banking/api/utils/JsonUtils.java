@@ -37,4 +37,14 @@ public class JsonUtils {
 		mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 		return mapper;
 	}
+
+	public static String createPrettyPrintJson(Object jsonObject) {
+		try {
+			var mapper = createObjectMapper();
+			mapper.enable(SerializationFeature.INDENT_OUTPUT);
+			return mapper.writeValueAsString(jsonObject);
+		} catch (Exception e) {
+			throw new BusinessException("Error while pretty print json.", e);
+		}
+	}
 }
