@@ -23,8 +23,6 @@ public class CustomerInputDTO {
     private LocalDate birthDate;
     private String maritalStatus;
     private String email;
-    private Integer managerId;
-    private Integer classificationCode;
     private CostumerAddressInputDTO address;
     private CostumerContactInputDTO contact;
     @JsonIgnore

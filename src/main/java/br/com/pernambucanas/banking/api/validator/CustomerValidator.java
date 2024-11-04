@@ -38,9 +38,6 @@ public class CustomerValidator implements ConstraintValidator<CustomerConstraint
         if (Objects.isNull(inputDTO.getBirthDate())) {
             error.add("Birth date is required.");
         }
-        if (Objects.isNull(inputDTO.getManagerId())) {
-            error.add("Manager id is required.");
-        }
         if (StringUtils.isNotBlank(inputDTO.getEmail()) && !new EmailValidator().isValid(inputDTO.getEmail(), context)) {
             error.add("Invalid email.");
         }

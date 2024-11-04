@@ -41,7 +41,6 @@ public class CustomerControllerTest {
                 .email("email@gmai.com")
                 .rg("3125587777")
                 .birthDate(LocalDate.now())
-                .managerId(1)
                 .address(CustomerInputDTO.CostumerAddressInputDTO.builder()
                         .address("Rua Joao")
                         .number("123")
@@ -96,7 +95,6 @@ public class CustomerControllerTest {
                 .email("email@gmai.com")
                 .rg("3125587777")
                 .birthDate(LocalDate.now())
-                .managerId(1)
                 .build();
         mockMvc.perform(MockMvcRequestBuilders.post("/customer")
                         .content(JsonUtils.converObjectToJsonInString(inputDTO))
