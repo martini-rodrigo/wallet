@@ -67,4 +67,21 @@ public class JsonUtilsTest {
         assertTrue(exception.getMessage().contains("Error convert json to object."));
     }
 
+    @Test
+    void testCreatePrettyPrintJson() {
+        var inputDTO = CustomerInputDTO.builder()
+                .companyId(23L)
+                .name("Name")
+                .document("3333333369")
+                .contact(CustomerInputDTO.CostumerContactInputDTO.builder()
+                        .phone("333333333")
+                        .build())
+                .address(CustomerInputDTO.CostumerAddressInputDTO.builder()
+                        .address("Rua Joao")
+                        .build())
+                .build();
+        var jsonObject = JsonUtils.createPrettyPrintJson(inputDTO);
+        assertNotNull(jsonObject);
+    }
+
 }

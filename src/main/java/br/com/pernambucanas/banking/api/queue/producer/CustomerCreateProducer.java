@@ -19,7 +19,7 @@ public class CustomerCreateProducer {
 	private final PubSubTemplate pubSubTemplate;
 
 	public CustomerInputDTO publish(CustomerInputDTO inputDTO) {
-		log.info("publishing in topic [{}] : {} ", createCustomerRequestTopic, inputDTO);
+		log.info("publishing in topic [{}] : {} ", createCustomerRequestTopic, JsonUtils.createPrettyPrintJson(inputDTO));
 		pubSubTemplate.publish(createCustomerRequestTopic, inputDTO);
 		return inputDTO;
 	}
