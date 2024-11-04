@@ -1,13 +1,10 @@
 {
-   "id":7375734,
    "name":"Teste-Customer",
    "document":"66071167019",
    "rg":"00000000099",
-   "companyId":23,
    "gender":"M",
    "birthDate":"2000-08-01",
    "maritalStatus":"SINGLE",
-   "managerId":2,
    "email":"email@email.com",
    "address":{
       "address":"Avenida Joao",
