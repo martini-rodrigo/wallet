@@ -16,8 +16,6 @@ public class CustomerInputDTO {
 
     @Hidden
     private Long companyId;
-    @Hidden
-    private CostumerAccountInputDTO account;
 
     private String name;
     private String document;
@@ -57,17 +55,6 @@ public class CustomerInputDTO {
         private String areaCode;
         private String phone;
 
-    }
-
-    @Builder
-    @Getter
-    @Setter
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class CostumerAccountInputDTO {
-
-        private Long number;
-        private Integer digit;
     }
 
 }

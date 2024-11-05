@@ -11,14 +11,8 @@ public class CustomerService {
 
     private final CustomerCreateProducer customerCreateProducer;
 
-    private final BankingAccountService bankingAccountService;
 
     public void save(CustomerInputDTO inputDTO) {
-        var accountNumberGeneratorOutputDTO = bankingAccountService.numberGenerator(inputDTO.getCompanyId());
-        var account = new CustomerInputDTO.CostumerAccountInputDTO(accountNumberGeneratorOutputDTO.getNumber(),
-                accountNumberGeneratorOutputDTO.getDigit());
-        inputDTO.setAccount(account);
-
         customerCreateProducer.publish(inputDTO);
     }
 }
