@@ -7,7 +7,7 @@ import io.swagger.v3.oas.models.info.Info;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@OpenAPIDefinition(servers = {@Server(url = "/api/banking-ap", description = "Default Server URL")})
+@OpenAPIDefinition(servers = {@Server(url = "/api/banking-api", description = "Default Server URL")})
 @Configuration
 public class SwaggerConfig {
 
