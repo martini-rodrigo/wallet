@@ -6,7 +6,7 @@ The Wallet Service is a RESTful API built with Spring Boot to manage digital wal
 
 ---
 
-##  Technologies Used
+## 📦 Technologies Used
 
 - Java 21
 - Spring Boot 3.3.1
@@ -17,7 +17,7 @@ The Wallet Service is a RESTful API built with Spring Boot to manage digital wal
 
 ---
 
-##  How to Run
+## 🛠️ How to Run
 
 ### Prerequisites
 
@@ -43,7 +43,7 @@ docker-compose up --build
 
 ---
 
-##  Running Tests
+## 🧪 Running Tests
 
 Unit and integration tests are executed with:
 
@@ -51,10 +51,21 @@ Unit and integration tests are executed with:
 ./mvnw test
 ```
 
+---
+
+## ✅ Functional Requirements
+
+- Create wallet for a user
+- Get current balance
+- Get historical balance at a specific datetime
+- Deposit and withdraw funds
+- Transfer funds between wallets
+- Guarantee idempotent operations
+- Produce audit log to Kafka
 
 ---
 
-##  Non-Functional Requirements
+## ⚙️ Non-Functional Requirements
 
 - **Idempotency**: Supported via `Idempotency-Key` in headers
 - **Kafka Logging**: All transactions are logged asynchronously to Kafka
@@ -65,7 +76,7 @@ Unit and integration tests are executed with:
   Although the system performs basic exception handling, not all errors are centralized or exposed. Some internal exceptions are intentionally not returned to the client to avoid leaking sensitive information. A centralized error handler (e.g., via @ControllerAdvice) is planned for future improvements, ensuring standardized and secure error responses across the system.
 - ---
 
-##  Design Choices
+## 📌 Design Choices
 
 - **Spring Boot** was chosen for rapid development, robustness, and integration with Kafka and validation frameworks.
 - **Kafka** is used for audit logging to decouple logging from business logic and allow future integration with data analytics.
@@ -74,7 +85,7 @@ Unit and integration tests are executed with:
 
 ---
 
-##  Trade-offs
+## ⚠️ Trade-offs
 
 Due to time constraints, the following compromises were made:
 
@@ -82,6 +93,14 @@ Due to time constraints, the following compromises were made:
 - **Architecture**: Although the intention was to follow SOLID principles, the full refactoring to adhere strictly to these principles was not completed due to lack of time.
 - **Tests**: Only basic tests included; more scenarios and edge cases could be covered.
 - **Database**: Replace H2 with PostgreSQL or another production-grade DB.
+
+---
+
+## 📅 Date
+
+June 2025
+
+---
 
 ---
 
