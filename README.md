@@ -53,15 +53,90 @@ Unit and integration tests are executed with:
 
 ---
 
-## ✅ Functional Requirements
+## ✅ API Endpoints
 
-- Create wallet for a user
-- Get current balance
-- Get historical balance at a specific datetime
-- Deposit and withdraw funds
-- Transfer funds between wallets
-- Guarantee idempotent operations
-- Produce audit log to Kafka
+1. Create Wallet  
+   POST /wallet/{userId}  
+   Creates a wallet for the given user.
+
+   Path Parameters:
+   - userId: UUID of the user
+
+   Response: 201 Created
+   Example:
+   "5f6e8b2c-d5e6-45a6-b109-9878e4c7f11c"
+
+2. Get Current Balance  
+   GET /wallet/{userId}/balance  
+   Returns the current balance of the user's wallet.
+
+   Response: 200 OK
+   Example:
+   {
+     "userId": "uuid",
+     "balance": 100.00
+   }
+
+3. Get Historical Balance  
+   GET /wallet/{userId}/historical-balance?at=yyyy-MM-dd HH:mm:ss  
+   Returns the wallet balance at a specific past datetime.
+
+   Query Parameters:
+   - at: Datetime in format yyyy-MM-dd HH:mm:ss
+
+   Response: 200 OK
+   Example:
+   {
+     "userId": "uuid",
+     "balance": 50.00
+   }
+
+4. Deposit Funds  
+   POST /wallet/{userId}/deposit  
+   Deposits a value into the user’s wallet.
+
+   Headers:
+   - Idempotency-Key: UUID for duplicate request prevention
+
+   Request Body:
+   {
+     "amount": 100.00,
+     "description": "Test deposit"
+   }
+
+   Response: 200 OK
+
+5. Withdraw Funds  
+   POST /wallet/{userId}/withdraw  
+   Withdraws a value from the user’s wallet.
+
+   Headers:
+   - Idempotency-Key: UUID for duplicate request prevention
+
+   Request Body:
+   {
+     "amount": 50.00,
+     "description": "Withdrawal"
+   }
+
+   Response: 200 OK
+
+6. Transfer Funds  
+   POST /wallet/transfer  
+   Transfers funds between two user wallets.
+
+   Headers:
+   - Idempotency-Key: UUID for duplicate request prevention
+
+   Request Body:
+   {
+     "fromUserId": "uuid",
+     "toUserId": "uuid",
+     "amount": 20.00,
+     "description": "Transfer"
+   }
+
+   Response: 200 OK
 
 ---
 
