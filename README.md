@@ -80,5 +80,7 @@ Due to time constraints, the following compromises were made:
 - **Security**: No authentication or authorization was implemented, assuming a trusted internal environment.
 - **Architecture**: Although the intention was to follow SOLID principles, the full refactoring to adhere strictly to these principles was not completed due to lack of time.
 - **Tests**: Only basic tests included; more scenarios and edge cases could be covered.
+- **Database**: Replace H2 with PostgreSQL or another production-grade DB.
+
 ---
 
