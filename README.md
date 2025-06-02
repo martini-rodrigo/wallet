@@ -153,11 +153,12 @@ Unit and integration tests are executed with:
 
 ## 📌 Design Choices
 
-- **Spring Boot** was chosen for rapid development, robustness, and integration with Kafka and validation frameworks.
-- **Kafka** is used for audit logging to decouple logging from business logic and allow future integration with data analytics.
-- **Idempotency Control** ensures safe retries of operations like deposits or transfers using a custom strategy at the service layer.
-- **Docker Compose** simplifies running the whole stack locally, including Kafka and Kafka UI.
-- **One Wallet per User** The system is designed so that each user can have only one wallet. This decision was made to simplify balance management, ensure transaction integrity, and improve traceability.
+- **Spring Boot**: was chosen for rapid development, robustness, and integration with Kafka and validation frameworks.
+- **Kafka**: is used for audit logging to decouple logging from business logic and allow future integration with data analytics.
+- **Idempotency Control**: ensures safe retries of operations like deposits or transfers using a custom strategy at the service layer.
+- **Docker Compose**: simplifies running the whole stack locally, including Kafka and Kafka UI.
+- **One Wallet per User**: The system is designed so that each user can have only one wallet. This decision was made to simplify balance management, ensure transaction integrity, and improve traceability.
+The current system architecture assumes a one-to-one relationship between User and Wallet.
 
 ---
 
