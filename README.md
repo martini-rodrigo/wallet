@@ -1,4 +1,4 @@
-# Wallet Service
+# Wallet App
 
 ## Overview
 
@@ -53,7 +53,7 @@ Unit and integration tests are executed with:
 
 ---
 
-##  Non-Functional Requirements Met
+##  Non-Functional Requirements
 
 - **Idempotency**: Supported via `Idempotency-Key` in headers
 - **Kafka Logging**: All transactions are logged asynchronously to Kafka
