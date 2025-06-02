@@ -60,8 +60,9 @@ Unit and integration tests are executed with:
 - **Validation**: Inputs are validated using Jakarta Bean Validation
 - **Scalability-ready**: Modular architecture and stateless operations
 - **Observability-ready**: Logs key events; easy to plug into observability tools
-
----
+- **Error Handling**:
+  Although the system performs basic exception handling, not all errors are centralized or exposed. Some internal exceptions are intentionally not returned to the client to avoid leaking sensitive information. A centralized error handler (e.g., via @ControllerAdvice) is planned for future improvements, ensuring standardized and secure error responses across the system.
+- ---
 
 ##  Design Choices
 
