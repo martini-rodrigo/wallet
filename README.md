@@ -170,6 +170,7 @@ Due to time constraints, the following compromises were made:
 - **Architecture**: Although the intention was to follow SOLID principles, the full refactoring to adhere strictly to these principles was not completed due to lack of time.
 - **Tests**: Only basic tests included; more scenarios and edge cases could be covered.
 - **Database**: Replace H2 with PostgreSQL or another production-grade DB.
+- **Refactor transaction using the Strategy Pattern**: Currently, the logic for handling different transaction types (deposit, withdrawal, transfer, etc.) is centralized in a single service class. While this approach works for now, it tends to grow in complexity and violates clean code principles as more transaction types and business rules are introduced.
 
 ---
 
